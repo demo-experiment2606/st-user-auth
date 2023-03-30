@@ -4,6 +4,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 from passlib.hash import pbkdf2_sha256
+import streamlit_analytics
 
 # Set up the JSON file
 def load_users_data():
@@ -42,7 +43,9 @@ def update_password(username, new_password):
 
 # Streamlit app
 def main():
-
+    
+    streamlit_analytics.track(firestore_key_file="st-demo-user-auth-firebase.json", firestore_collection_name="counts")
+    
     if "logged_in" not in st.session_state:
         st.session_state.logged_in = False
     if "user_username" not in st.session_state:
